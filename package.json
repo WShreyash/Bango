@@ -1,0 +1,26 @@
+{
+  "name": "bango",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/WShreyash/Bango#readme",
+  "bugs": {
+    "url": "https://github.com/WShreyash/Bango/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WShreyash/Bango.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "dev": "nodemon --exec electron ."
+  },
+  "devDependencies": {
+    "electron": "^35.0.1",
+    "electron-reload": "^2.0.0-alpha.1"
+  }
+}
