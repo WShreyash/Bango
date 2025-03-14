@@ -2,7 +2,7 @@ require('electron-reload')(__dirname, {
     electron: require(`${__dirname}/node_modules/electron`)
 });
 
-const { app, BrowserWindow } = require('electron/main');
+const { app, BrowserWindow, shell } = require('electron/main');
 const path = require('node:path');
 
 function createWindow() {
@@ -18,11 +18,15 @@ function createWindow() {
     });
 
     win.center();
-
     win.loadFile('index.html');
 
     win.once('ready-to-show', () => {
         win.setAlwaysOnTop(true, 'normal');
+    });
+
+    win.webContents.setWindowOpenHandler(({ url }) => {
+        shell.openExternal(url);
+        return { action: 'deny' };
     });
 }
 
