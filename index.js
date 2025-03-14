@@ -2,18 +2,23 @@ require('electron-reload')(__dirname, {
     electron: require(`${__dirname}/node_modules/electron`)
 });
 
-const { app, BrowserWindow, shell } = require('electron/main');
+const { app, BrowserWindow, shell, globalShortcut, ipcMain } = require('electron/main');
 const path = require('node:path');
 
+let win;
+
 function createWindow() {
-    const win = new BrowserWindow({
+    win = new BrowserWindow({
         width: 350,
         height: 70,
         frame: false,
         transparent: true,
         resizable: false,
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js')
+            preload: path.join(__dirname, 'preload.js'),
+            contextIsolation: true,
+            enableRemoteModule: false,
+            nodeIntegration: false
         }
     });
 
@@ -30,8 +35,20 @@ function createWindow() {
     });
 }
 
+ipcMain.on('hide-window', () => {
+    if (win) win.hide();
+});
+
 app.whenReady().then(() => {
     createWindow();
+
+    globalShortcut.register('Control+Space', () => {
+        if (win) {
+            win.isVisible() ? win.hide() : win.show();
+        } else {
+            createWindow();
+        }
+    });
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
@@ -40,8 +57,14 @@ app.whenReady().then(() => {
     });
 });
 
+app.on('will-quit', () => {
+    globalShortcut.unregisterAll();
+});
+
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
         app.quit();
+    } else {
+        win = null;
     }
 });

@@ -17,6 +17,8 @@ document.getElementById('searchBox').addEventListener('keydown', function (event
             }
 
             window.open(searchURL, '_blank', 'noopener,noreferrer');
+
+            window.electron.hideWindow();
         }
 
         this.value = '';
