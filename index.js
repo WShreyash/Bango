@@ -1,6 +1,8 @@
-require('electron-reload')(__dirname, {
-    electron: require(`${__dirname}/node_modules/electron`)
-});
+if (process.env.NODE_ENV === 'development') {
+    require('electron-reload')(__dirname, {
+        electron: require(`${__dirname}/node_modules/electron`)
+    });
+}
 
 const { app, BrowserWindow, shell, globalShortcut, ipcMain } = require('electron/main');
 const path = require('node:path');

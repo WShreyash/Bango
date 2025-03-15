@@ -1,7 +1,7 @@
 {
   "name": "bango",
   "version": "1.0.0",
-  "description": "",
+  "description": "Bango - A powerful utility app",
   "homepage": "https://github.com/WShreyash/Bango#readme",
   "bugs": {
     "url": "https://github.com/WShreyash/Bango/issues"
@@ -11,16 +11,57 @@
     "url": "git+https://github.com/WShreyash/Bango.git"
   },
   "license": "ISC",
-  "author": "",
+  "author": "WShreyash",
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "dev": "nodemon --exec electron ."
+    "dev": "nodemon --exec electron .",
+    "clean:win": "rm -rf dist/win-* dist/*.exe",
+    "clean:mac": "rm -rf dist/mac-* dist/*.dmg dist/*.zip",
+    "clean:linux": "rm -rf dist/linux-* dist/*.AppImage dist/*.deb dist/*.snap",
+    "build:win": "npm run clean:win && electron-builder --win",
+    "build:mac": "npm run clean:mac && electron-builder --mac",
+    "build:linux": "npm run clean:linux && electron-builder --linux"
+  },
+  "build": {
+    "appId": "com.wshreyash.bango",
+    "productName": "Bango",
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": [
+        "zip",
+        "tar.gz"
+      ],
+      "category": "public.app-category.utilities"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "snap"
+      ],
+      "category": "Utility"
+    },
+    "files": [
+      "**/*",
+      "!node_modules/*/{test,tests}/**",
+      "!*.map",
+      {
+        "from": "node_modules/electron/dist/ffmpeg.dll",
+        "to": "."
+      }
+    ],
+    "directories": {
+      "output": "dist"
+    }
   },
   "devDependencies": {
     "electron": "^35.0.1",
+    "electron-builder": "^25.1.8",
     "electron-reload": "^2.0.0-alpha.1"
   }
 }
