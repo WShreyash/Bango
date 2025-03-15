@@ -4,10 +4,16 @@ if (process.env.NODE_ENV === 'development') {
     });
 }
 
+const AutoLaunch = require('electron-auto-launch');
 const { app, BrowserWindow, shell, globalShortcut, ipcMain } = require('electron/main');
 const path = require('node:path');
 
 let win;
+
+const bangoAutoLauncher = new AutoLaunch({
+    name: 'Bango',
+    path: app.getPath('exe')
+});
 
 function createWindow() {
     win = new BrowserWindow({
@@ -16,6 +22,7 @@ function createWindow() {
         frame: false,
         transparent: true,
         resizable: false,
+        show: false,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             contextIsolation: true,
@@ -42,6 +49,12 @@ ipcMain.on('hide-window', () => {
 });
 
 app.whenReady().then(() => {
+    bangoAutoLauncher.isEnabled().then((isEnabled) => {
+        if (!isEnabled) {
+            bangoAutoLauncher.enable();
+        }
+    });
+
     createWindow();
 
     globalShortcut.register('Control+Space', () => {
