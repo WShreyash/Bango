@@ -11,7 +11,10 @@
     "url": "git+https://github.com/WShreyash/Bango.git"
   },
   "license": "ISC",
-  "author": "WShreyash",
+  "author": {
+    "name": "WShreyash",
+    "email": "wale11shreaysh@gmail.com"
+  },
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
@@ -30,14 +33,14 @@
     "appId": "com.wshreyash.bango",
     "productName": "Bango",
     "win": {
-      "target": "nsis",
-      "nsis": {
-        "oneClick": false,
-        "allowToChangeInstallationDirectory": true,
-        "runAfterFinish": true,
-        "createDesktopShortcut": true,
-        "createStartMenuShortcut": true
-      }
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "runAfterFinish": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
     },
     "mac": {
       "target": [
@@ -56,6 +59,7 @@
         "snap"
       ],
       "category": "Utility",
+      "maintainer": "WShreyash wale11shreaysh@gmail.com",
       "desktop": {
         "StartupNotify": "true",
         "X-GNOME-Autostart-enabled": "true"
