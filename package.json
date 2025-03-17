@@ -33,7 +33,8 @@
     "appId": "com.wshreyash.bango",
     "productName": "Bango",
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "icon": "assets/icon.ico"
     },
     "nsis": {
       "oneClick": false,
@@ -47,6 +48,7 @@
         "zip",
         "tar.gz"
       ],
+      "icon": "assets/icon.icns",
       "category": "public.app-category.utilities",
       "extendInfo": {
         "LSUIElement": "1"
@@ -58,6 +60,7 @@
         "deb",
         "snap"
       ],
+      "icon": "assets/icon.png",
       "category": "Utility",
       "maintainer": "WShreyash wale11shreaysh@gmail.com",
       "desktop": {

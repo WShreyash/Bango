@@ -18,11 +18,12 @@ const bangoAutoLauncher = new AutoLaunch({
 function createWindow() {
     win = new BrowserWindow({
         width: 350,
-        height: 70,
+        height: 65,
         frame: false,
         transparent: true,
         resizable: false,
         show: false,
+        icon: path.join(__dirname, 'assets/icon.png'),
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             contextIsolation: true,
